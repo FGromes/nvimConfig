@@ -20,26 +20,26 @@ return {
 
 
 
-            local swift_lsp = vim.api.nvim_create_augroup("swift_lsp", { clear = true })
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "swift" },
-                callback = function()
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
-                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
+        --    local swift_lsp = vim.api.nvim_create_augroup("swift_lsp", { clear = true })
+        --    vim.api.nvim_create_autocmd("FileType", {
+        --        pattern = { "swift" },
+        --        callback = function()
+        --            vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
+        --            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
 
-                    local root_dir = vim.fs.dirname(vim.fs.find({
-                        "Package.swift",
-                        ".git",
-                    }, { upward = true })[1])
-                    local client = vim.lsp.start({
-                        name = "sourcekit-lsp",
-                        cmd = { "sourcekit-lsp" },
-                        root_dir = root_dir,
-                    })
-                    vim.lsp.buf_attach_client(0, client)
-                end,
-                group = swift_lsp,
-            })
+        --            local root_dir = vim.fs.dirname(vim.fs.find({
+        --                "Package.swift",
+        --                ".git",
+        --            }, { upward = true })[1])
+        --            local client = vim.lsp.start({
+        --                name = "sourcekit-lsp",
+        --                cmd = { "sourcekit-lsp" },
+        --                root_dir = root_dir,
+        --            })
+        --            vim.lsp.buf_attach_client(0, client)
+        --        end,
+        --        group = swift_lsp,
+        --    })
 
             -- ##############################################################################
             -- Lua 
@@ -84,18 +84,6 @@ return {
                     }
                 }
             }
-
-
-
-
-
-            vim.api.nvim_create_autocmd('LspAttach', {
-                desc = "LSP Actions",
-                callback = function(args)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, {noremap = true, silent = true})
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {noremap = true, silent = true})
-                end,
-            })
         end,
     },
 }
